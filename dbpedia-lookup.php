@@ -1,7 +1,18 @@
 <?php
 
-$jsonurl = "http://dbpedia.org/data/Los_Angeles.json";
+// echo $_GET['city'];
+
+$jsonurl = 'http://dbpedia.org/data/' . $_GET['city'] . '.json';
 $json = file_get_contents($jsonurl);
-var_dump(json_decode($json));
+
+$json = json_decode($json);
+
+foreach ($json as $key => $value) {
+	if ($key == 'http://dbpedia.org/ontology/populationTotal') {
+		echo $key . ' ';
+	}
+	
+}
+// var_dump($json);
 
 ?>
