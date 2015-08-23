@@ -2,27 +2,32 @@
 
 // echo $_GET['city'];
 
-$jsonurl = 'http://dbpedia.org/data/' . $_GET['city'] . '.json';
-$json = file_get_contents($jsonurl);
+$jsonURL = 'http://dbpedia.org/data/' . $_GET['city'] . '.json';
+$jsonData = file_get_contents($jsonURL);
+$jsonArray = json_decode($jsonData, true);
 
-$json = json_decode($json);
-// $json_city = json_decode($json['http://dbpedia.org/resource/Los_Angeles'])
+$resourceKey = 'http://dbpedia.org/resource/' . $_GET['city'];
+$populationTotalKey = 'http://dbpedia.org/ontology/populationTotal';
+$populationDensityKey = 'http://dbpedia.org/ontology/populationDensity';
+$areaTotalKey = 'http://dbpedia.org/ontology/areaTotal';
 
 $cityInfo = [];
+$cityInfo["populationTotal"] = $jsonArray[$resourceKey][$populationTotalKey][0]['value'];
+$cityInfo["populationDensity"] = $jsonArray[$resourceKey][$populationDensityKey][0]['value'];
+$cityInfo["areaTotal"] = $jsonArray[$resourceKey][$areaTotalKey][0]['value'];
 
-foreach ($json as $key => $value) {
-	if($key == 'http://dbpedia.org/resource/Los_Angeles') {
-		foreach ($value as $key1 => $value1) {
-			if ($key1 == 'http://dbpedia.org/ontology/populationTotal') {
-				$cityInfo["populationTotal"] = $value1[0]->value;
-			}
-		}
-		// $value = json_decode($value);
-		
-	}
-	
-}
 echo json_encode($cityInfo);
-// var_dump($json_city);
+
+function getJSONURL() {
+	return 'http://dbpedia.org/data/' . $_GET['city'] . '.json';
+}
+
+function getJSONData($jsonURL) {
+	return file_get_contents($jsonURL);
+}
+
+function getAssociativeArray($jsonData) {
+	return json_decode($jsonData);
+}
 
 ?>
