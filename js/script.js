@@ -50,7 +50,7 @@ function addSpinner() {
     fps: 20, 
     zIndex: 2e9, 
     className: 'spinner', 
-    top: '50%', 
+    top: '35%', 
     left: '50%', 
     shadow: false, 
     hwaccel: false, 
