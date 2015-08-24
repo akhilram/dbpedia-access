@@ -23,5 +23,9 @@ function getJSONData(e) {
 }
 
 function processData(output) {
+  $("#collapse").collapse('show');
+  $("#area").text(output["areaTotal"]);
+  $("#population").text(output["populationTotal"]);
+  $("#density").text(output["populationDensity"]);
   console.log(output);
 }
