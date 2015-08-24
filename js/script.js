@@ -27,9 +27,9 @@ function processData(output) {
   $("#result").css("display", "inline");
   spinner.stop();
   $("#collapse").collapse('show');
-  $("#area").text(output["areaTotal"]);
+  $("#area").text(output["areaTotal"] + ' sq. km.');
   $("#population").text(output["populationTotal"]);
-  $("#density").text(output["populationDensity"]);
+  $("#density").text(output["populationDensity"] + ' / sq. km.');
   console.log(output);
 }
 
